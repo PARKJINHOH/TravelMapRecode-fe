@@ -1,26 +1,37 @@
 import React from 'react';
 import { useMemo } from "react";
-import {GoogleMap, Marker, useLoadScript} from '@react-google-maps/api';
+import {GoogleMap, LoadScript} from '@react-google-maps/api';
 
 export default function GoogleMapApi() {
-    const { isLoaded } = useLoadScript({
-        googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
-    });
-
-    if (!isLoaded){
-        return <div>Loading...</div>;
-    }
     return <Map />;
 }
 
 function Map() {
+    const containerStyle = {
+        width: '100%',
+        height: '100vh'
+    };
+
     const center = useMemo(() => ({
         lat: 37.580283, lng: 126.976641
     }), []);
 
+    const mapOptions = {
+        fullscreenControl: false,
+    };
+
     return (
-        <GoogleMap zoom={7} center={center} mapContainerClassName="map-container">
-            <Marker position={center} />
-        </GoogleMap>
+        //https://react-google-maps-api-docs.netlify.app/
+        <LoadScript
+            googleMapsApiKey={process.env.REACT_APP_GOOGLE_MAPS_API_KEY}>
+            <GoogleMap
+                zoom={10}
+                mapContainerStyle={containerStyle}
+                center={center}
+                options={mapOptions}>
+                { /* Child components, such as markers, info windows, etc. */ }
+                <></>
+            </GoogleMap>
+        </LoadScript>
     );
 }
