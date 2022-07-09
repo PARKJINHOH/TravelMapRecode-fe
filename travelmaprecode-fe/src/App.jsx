@@ -1,9 +1,11 @@
 import './App.css';
+import './style/globals.css'
+import GoogleMapApi from "./components/google/GoogleMapApi";
 
 function App() {
     return (
         <div>
-            <div>Hello World</div>
+            <GoogleMapApi/>
         </div>
     );
 }
