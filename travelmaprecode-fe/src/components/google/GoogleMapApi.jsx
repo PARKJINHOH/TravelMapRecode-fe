@@ -1,8 +1,8 @@
 import React from 'react';
 import { useMemo } from "react";
 import {GoogleMap, LoadScript} from '@react-google-maps/api';
-import SignUpBtn from "../page/SignUpBtn";
-import SignInBtn from "../page/SignInBtn";
+import RegisterBtn from "../register/RegisterBtn";
+import LoginBtn from "../login/LoginBtn";
 
 export default function GoogleMapApi() {
     return <Map />;
@@ -33,8 +33,8 @@ function Map() {
                 options={mapOptions}>
                 { /* Child components, such as markers, info windows, etc. */ }
             </GoogleMap>
-            <SignInBtn/>
-            <SignUpBtn/>
+            <LoginBtn/>
+            <RegisterBtn/>
         </LoadScript>
     );
 }
