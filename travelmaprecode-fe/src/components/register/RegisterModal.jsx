@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import {Modal, Button, Form, Container} from "react-bootstrap";
+import {sendGetApi, sendPostApi} from '../../api/api';
 
 import './RegisterModal.css'
 
@@ -25,10 +26,43 @@ const RegisterModal = ({show, onHide}) => {
     }
 
     const onSubmit = (event) => {
-        event.preventDefault()
-        if (password !== confirmPassword) {
-            return alert('비밀번호와 비밀번호확인은 같아야 합니다.')
+        event.preventDefault();
+
+        if (nickname == null || nickname.length < 3) {
+            return alert('닉네임은 3글자 이상 적어주세요.');
         }
+
+        if (email == null) {
+            return alert('이메일 확인해주세요.');
+        }
+
+        if (password == null) {
+            return alert('비밀번호 확인해주세요.');
+        }
+
+        if (confirmPassword == null) {
+            return alert('비밀번호 확인해주세요.');
+        }
+
+        if (password !== confirmPassword) {
+            return alert('비밀번호와 비밀번호확인은 같아야 합니다.');
+        }
+
+        // 이메일 중복확인
+        const data = async () => {
+            JSON.stringify({
+                email: email
+            });
+        }
+
+        let isDuplicateEmail =  sendGetApi('/api/duplicate/email', data);
+        if(isDuplicateEmail){
+            return alert('이메일이 중복입니다.');
+        }
+
+        // post 요청
+
+
     }
 
     return (
